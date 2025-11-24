@@ -1,18 +1,32 @@
 # Domain Driven Design Components
-![ci branch parameter](https://github.com/acidicsoftware/dotnet-domaindrivendesign/workflows/Continuous%20Integration/badge.svg?branch=trunk)
+## Deprecation Notice ⚠️
+
+**This repository is deprecated.**  
+
+Efforts have been consolidated into a new repository with a cleaner structure and ongoing improvements:  
+
+👉 [dotnet-domain-driven-design](https://github.com/michelgammelgaard/dotnet-domain-driven-design)  
+
+The new repository contains similar functionality, and plan to add the missing features in the near future.  
+
+**Action recommended:**  
+- For new projects, please use [dotnet-domain-driven-design](https://github.com/michelgammelgaard/dotnet-domain-driven-design).  
+- Existing projects can continue using this repository, but no further updates or maintenance will be provided here.
+
+## Original Documentation
 
 This .NET library provides base classes useful in projects that aims to conform to Domain Driven Design principles or projects that just wants to use the tiny types pattern.
 
 The code is heavily inspired by the book Patterns, Principles, and Practices of Domain-Driven Design by Scott Millett.
 
-## Classes
+### Classes
 The library defines three different base classes.
 
 * Entity
 * Value
 * TinyValue
 
-## Entity
+### Entity
 The `Entity` class is the base class for entities and aggregate roots.
 
 An entity is defined by having a unique identifier. This identifier alone makes an entity unique.
@@ -45,7 +59,7 @@ No other members are taken into consideration when comparing entity classes.
 
 The `==` and `!=` operators are also available for comparison operations.
 
-## Value
+### Value
 The `Value` class is the base class for value types.
 
 By default all fields and properties (from now on referred to a **value members**) in a value type, are evaluated when comparing two values of the same type.
@@ -76,7 +90,7 @@ All excluded value members are skipped. More on that in the next sections.
 
 The `==` and `!=` operators are also available for comparison operations.
 
-### Excluding Value Members
+#### Excluding Value Members
 Annotate a value member with [ExcludeAttribute](src/DomainDrivenDesign/ExcludeAttribute.cs) to exclude it from equality operations.
 
 ```csharp
@@ -104,7 +118,7 @@ var secondSalmonNirigi = new Sushi("Salmon Nigiri", 0.99);
 var salmonNigiriPiecesAreEqual = firstSalmonNirigi == secondSalmonNirigi; // true
 ```
 
-### Including Value Members
+#### Including Value Members
 An excluded virtual property can be included in a child class by overriding the property and annotating it with [IncludeAttribute](src/DomainDrivenDesign/IncludeAttribute.cs).
 
 ```csharp
@@ -131,7 +145,7 @@ var salmonNigiriPiecesAreEqual = firstSalmonNirigi.Equals(secondSalmonNirigi); /
 
 If the `Price` property had not been explicitly annotated with [IncludeAttribute](src/DomainDrivenDesign/IncludeAttribute.cs) then the exclusion would have been inherited and the price would still have been ignored.
 
-### A Word on Inheritance
+#### A Word on Inheritance
 The state of value members are inherited by child classes.
 If a value member is excluded then it's also excluded in all classes inheriting from this class.
 
@@ -165,7 +179,7 @@ Technically it wouldn't matter whether or not the backing field in this example 
 
 Backing fields automatically created by the compiler for properties are always ignored.
 
-## TinyValue
+### TinyValue
 
 Coming soon.
 
